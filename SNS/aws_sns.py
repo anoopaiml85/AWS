@@ -1,9 +1,6 @@
 import boto3
 
-client = boto3.client('sns',
-                       aws_access_key_id='AKIA22C232RU3D2BTU7N',
-                       aws_secret_access_key ='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',
-                       region_name='us-east-2')
+client = boto3.clientboto3.client('sqs',aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),region_name=os.getenv('REGION_NAME'))
 email_body = '<h1>Hello &nbsp from SNS</h1>'
 client.publish(TargetArn='arn:aws:sns:us-east-2:743219909737:Anoop_test',
             Message=email_body, Subject='Hello', MessageStructure='string',
