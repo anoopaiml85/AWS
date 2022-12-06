@@ -3,18 +3,24 @@ import json
 import sys
 import time
 import os
+import configparser
+# config=configparser.ConfigParser()
+# config.read("config.ini")
 # from dotenv import load_dotenv
-
+from os import environ as config
 # load_dotenv()
 
 #sqs = boto3.resource('sqs',aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),region_name=os.getenv('REGION_NAME'))
-sqs = boto3.resource('sqs',aws_access_key_id= os.environ.get('AWS_ACCESS_KEY_ID'),aws_secret_access_key= os.environ.get('AWS_SECRET_ACCESS_KEY'),region_name= os.environ.get('REGION_NAME'))
+#sqs = boto3.resource('sqs',aws_access_key_id= os.environ.get('AWS_ACCESS_KEY_ID'),aws_secret_access_key= os.environ.get('AWS_SECRET_ACCESS_KEY'),region_name= os.environ.get('REGION_NAME'))
+#sqs = boto3.resource('sqs',aws_access_key_id= config['AWS_ACCESS_KEY_ID'],aws_secret_access_key= config['credentials']['AWS_SECRET_ACCESS_KEY'],region_name= config['credentials']['REGION_NAME'])
+sqs = boto3.resource('sqs',aws_access_key_id= config['AWS_ACCESS_KEY_ID'],aws_secret_access_key= config['AWS_SECRET_ACCESS_KEY'],region_name= config['REGION_NAME'])
 
 #sqs=boto3.resource('sqs')
 
 def create_queue(name,atr={}):
     queue=sqs.create_queue(QueueName=name,Attributes=atr)
     print(f"created queue with the name {name} with URL {queue.url}")
+
     #print(json.dumps(queue))
 
 
